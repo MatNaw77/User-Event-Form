@@ -3,6 +3,7 @@ import http from 'http';
 import expressSession from 'express-session';
 import cors from 'cors';
 import prepareRoutes from './routes.js';
+import prepareDatabase from './prepareDatabase.js';
 
 function logRequest(req, res, next) {
     console.info(`${req.method} ${req.originalUrl}`);
@@ -15,14 +16,7 @@ async function applyMiddleware (app, session) {
     app.use(express.json({ limit: '1mb', extended: true }));
     app.use(session);
     app.use(cors());
-    app.use((err, req, res, next) => {
-        if (err instanceof SyntaxError && err.status === 400 && 'body' in err) {
-            console.error(err);
-            return res.status(400).send(err.type);
-        }
-    });
 }
-
 
 async function prepareServer() {
     const app = express();
@@ -35,9 +29,11 @@ async function prepareServer() {
         saveUninitialized: true
     });
 
+    const database = await prepareDatabase();
+
     applyMiddleware(app, session);
 
-    prepareRoutes(appRouter)
+    prepareRoutes(appRouter, database)
     app.use('/api', appRouter);
 
     return httpServer;

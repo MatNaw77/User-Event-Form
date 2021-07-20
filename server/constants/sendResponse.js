@@ -3,7 +3,7 @@ import constants from './constants.js';
 const responseStatuses = {
     [constants.SUCCESS]: 200,
     [constants.ERROR]: 500,
-    [constants.MISSING_PARAMS]: 500
+    [constants.PARAM_ERROR]: 500
 };
 
 const sendResponse = (res, payload) => {
