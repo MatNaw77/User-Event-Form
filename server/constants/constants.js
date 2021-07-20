@@ -1,7 +1,7 @@
 const constants = {
     SUCCESS: 'OK',
     ERROR: 'Something went wrong',
-    MISSING_PARAMS: 'Some parameters are missing'
+    PARAM_ERROR: 'Some parameters are missing or are incorrect'
 }
 
 export default constants;
