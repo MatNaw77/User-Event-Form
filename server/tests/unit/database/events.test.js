@@ -7,7 +7,7 @@ let database = {};
 describe("events database tests", () => {
 
     beforeAll( async () => {
-        database = await prepareDatabase('./database/mock.database.db');
+        database = await prepareDatabase('./__mocks__/database/mock.database.db');
     });
 
     test('postEvent without arguments', () => {

@@ -6,8 +6,12 @@ const responseStatuses = {
     [constants.PARAM_ERROR]: 500
 };
 
-const sendResponse = (res, payload) => {
-    res.status(responseStatuses[payload] || 200).json({msg: payload});
+const sendResponse = async (res, payload) => {
+    try {
+        await res.status(responseStatuses[payload] || 500).json({msg: payload || constants.ERROR});
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 export default sendResponse;
