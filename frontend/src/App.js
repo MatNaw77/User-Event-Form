@@ -1,4 +1,4 @@
-import EventForm from "./Components/EventForm/EventForm";
+import EventForm from './Components/EventForm/EventForm';
 
 function App() {
   return (

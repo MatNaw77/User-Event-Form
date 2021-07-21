@@ -1,94 +1,115 @@
 import {
   Paper,
   Grid,
-  TextField,
   FormControl,
   FormLabel,
-  InputAdornment,
   Button,
   Container,
-  FormHelperText,
-} from "@material-ui/core";
-import { useStyles } from "./styles";
-import React from "react";
-import EmailIcon from "@material-ui/icons/Email";
+  CircularProgress,
+} from '@material-ui/core';
+import { useStyles } from './styles';
+import { useState } from 'react';
+import EmailInput from './controls/EmailInput';
+import TextInput from './controls/TextInput';
+import DatePicker from './controls/DatePicker';
+import Alert from '@material-ui/lab/Alert';
+import { sendFrom } from '../../functions/sendForm';
+import { grey } from '@material-ui/core/colors';
+
+const initialValues = {
+  firstName: '',
+  secondName: '',
+  email: '',
+  date: '',
+}
 
 export default function EventForm() {
   const classes = useStyles();
-  const [date, setDate] = React.useState(new Date());
+  const [values, setValues] = useState(initialValues);
+  const [errors, setErrors] = useState({});
+  const [result, setResult] = useState(1);
+  const [loading, setLoading] = useState(false);
+  
+  const validate = () => {
+    let temp = {
+      firstName: values.firstName ? '': 'This field is required.',
+      secondName: values.secondName ? '': 'This field is required.',
+      email: (/^$|.+@.+..+/).test(values.email) ? '': 'Email is not valid.',
+      date: values.date ? '': 'This field is required.',
+    };
 
-  const handleDateChange = (event) => {
-    
-    setDate(event.target.value);
-    console.log(event.target.value);
-  };
+    setErrors({
+      ...temp
+    });
 
-  const handleSubmit = () => {
-    console.log("wyslij");
+    return Object.values(temp).every(x => x === '');
+  }
+
+  const handleInputChange = (event) => {
+    const {name, value} = event.target;
+    setValues({
+      ...values,
+      [name]: value
+    });
+    console.log(values);
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (validate()){
+      setLoading(true);
+      sendFrom(values, setLoading);
+      setResult(3);
+    }
   };
 
   return (
     <Grid container className={classes.root}>
       <Paper className={classes.paper}>
         <Container fixed>
-          <FormControl margin="normal">
+          <FormControl margin='normal'>
             <FormLabel className={classes.header}>Add new event</FormLabel>
-            <TextField
-              size="small"
-              required
-              className={classes.textField}
-              id="firstName"
-              label="Fist Name"
-              variant="outlined"
+            <TextInput 
+                name='firstName'
+                label='First Name'
+                value={values.firstName}
+                onChange={handleInputChange} 
+                error={errors.firstName}
             />
-            <FormHelperText error>eror</FormHelperText>
-            <TextField
-              size="small"
-              required
-              className={classes.textField}
-              id="secondName"
-              label="Second Name"
-              variant="outlined"
+            <TextInput 
+                name='secondName'
+                label='Second Name'
+                value={values.secondName}
+                onChange={handleInputChange} 
+                error={errors.secondName}
             />
-            <FormHelperText error>eror</FormHelperText>
-            <TextField
-              required
-              size="small"
-              className={classes.textField}
-              id="email"
-              variant="outlined"
-              label="Email address"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <EmailIcon />
-                  </InputAdornment>
-                ),
-              }}
+            <EmailInput 
+                name='email'
+                label='Email Address'
+                value={values.email}
+                onChange={handleInputChange} 
+                error={errors.email}
             />
-            <FormHelperText error>eror</FormHelperText>
-            <TextField
-              required
-              id="date"
-              size="small"
-              label="Date"
-              type="date"
-              onChange={handleDateChange}
-              variant="outlined"
-              className={classes.textField}
-              InputLabelProps={{
-                shrink: true,
-              }}
+            <DatePicker 
+                name='date'
+                label='Date'
+                value={values.date}
+                onChange={handleInputChange} 
+                error={errors.date}
             />
             <Button
-              type="submit"
-              variant="contained"
-              color="primary"
+              type='submit'
+              variant='contained'
+              color='primary'
               className={classes.button}
               onClick={handleSubmit}
             >
               Submit
+              {loading && <CircularProgress size={24} style={{ color: grey[500] }}/>}
             </Button>
+            {result === 2 && <Alert severity="error">An error occured during adding to database!</Alert>}
+            {result === 3 && <Alert severity="success">An event has been added to database!</Alert>}
+
             <FormLabel className={classes.footer}>* required field</FormLabel>
           </FormControl>
         </Container>
