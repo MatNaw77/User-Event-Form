@@ -1,10 +1,8 @@
+import EventForm from "./Components/EventForm/EventForm";
+
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        hej
-      </header>
-    </div>
+    <EventForm />
   );
 }
 
