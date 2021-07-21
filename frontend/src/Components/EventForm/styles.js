@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
+import { grey } from '@material-ui/core/colors';
 
 const useStyles = makeStyles( () => ({
   root: {
@@ -34,6 +35,10 @@ const useStyles = makeStyles( () => ({
     height: '5%',
     marginTop: '7%'
   },
+
+  iconProcess: {
+    color: grey[500]
+  }
 }));
 
 export { useStyles };

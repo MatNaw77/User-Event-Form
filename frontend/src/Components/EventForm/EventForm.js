@@ -14,7 +14,6 @@ import TextInput from './controls/TextInput';
 import DatePicker from './controls/DatePicker';
 import Alert from '@material-ui/lab/Alert';
 import { sendFrom } from '../../functions/sendForm';
-import { grey } from '@material-ui/core/colors';
 
 const initialValues = {
   firstName: '',
@@ -105,7 +104,7 @@ export default function EventForm() {
               onClick={handleSubmit}
             >
               Submit
-              {loading && <CircularProgress size={24} style={{ color: grey[500] }}/>}
+              {loading && <CircularProgress size={24} style={classes.iconProcess}/>}
             </Button>
             {result === 2 && <Alert severity="error">An error occured during adding to database!</Alert>}
             {result === 3 && <Alert severity="success">An event has been added to database!</Alert>}
