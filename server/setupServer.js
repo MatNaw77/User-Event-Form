@@ -29,7 +29,7 @@ async function prepareServer() {
         saveUninitialized: true
     });
 
-    const database = await prepareDatabase();
+    const database = await prepareDatabase('./database/database.db');
 
     applyMiddleware(app, session);
 

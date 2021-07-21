@@ -1,5 +1,5 @@
 import { validationResult } from 'express-validator';
-import constants from '../constants/constants.js';
+import { constants } from '../constants/constants.js';
 import sendResponse from '../constants/sendResponse.js';
 import { addNewEvent } from '../services/events.js';
 

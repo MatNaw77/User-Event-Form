@@ -1,4 +1,4 @@
-import constants from './constants.js';
+import { constants } from './constants.js';
 
 const responseStatuses = {
     [constants.SUCCESS]: 200,

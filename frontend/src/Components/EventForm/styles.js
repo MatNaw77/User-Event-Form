@@ -9,9 +9,10 @@ const useStyles = makeStyles( () => ({
     alignItems: 'center',
   },
   paper: {
-    minHeight: '480px',
+    minHeight: '410px',
     minWidth: '350px',
-    height: '55%',
+    maxHeight: '100%',
+
     width: '20%',
     textAlign: 'center',
   },
@@ -23,7 +24,7 @@ const useStyles = makeStyles( () => ({
   },
   footer: {
     fontSize: 10,
-    marginTop: '9%',
+    marginTop: '5%',
   },
 
   textField: {

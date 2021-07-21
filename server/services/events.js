@@ -1,4 +1,4 @@
-import constants from '../constants/constants.js';
+import { constants } from '../constants/constants.js';
 import { postEvent } from '../database/events/events.js';
 
 const addNewEvent = async ({ database, firstName, secondName, email, date}) => {

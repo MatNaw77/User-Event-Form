@@ -4,4 +4,4 @@ const constants = {
     PARAM_ERROR: 'Some parameters are missing or are incorrect'
 }
 
-export default constants;
+export { constants };
