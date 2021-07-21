@@ -104,10 +104,10 @@ export default function EventForm() {
               onClick={handleSubmit}
             >
               Submit
-              {loading && <CircularProgress size={24} style={classes.iconProcess}/>}
+              {loading && <CircularProgress size={24} className={classes.iconProcess}/>}
             </Button>
-            {result === 2 && <Alert severity="error">An error occured during adding to database!</Alert>}
-            {result === 3 && <Alert severity="success">An event has been added to database!</Alert>}
+            {result === 2 && <Alert severity='error'>An error occured during adding to database!</Alert>}
+            {result === 3 && <Alert severity='success'>An event has been added to database!</Alert>}
 
             <FormLabel className={classes.footer}>* required field</FormLabel>
           </FormControl>

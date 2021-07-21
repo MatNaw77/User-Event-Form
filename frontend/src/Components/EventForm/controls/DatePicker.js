@@ -1,5 +1,6 @@
 import { TextField,   InputAdornment, } from '@material-ui/core';
 import { useStyles } from '../styles';
+import DateRange from '@material-ui/icons/DateRange';
 
 export default function DatePicker ({name, label, value, error, onChange }) { 
     const classes = useStyles();
@@ -18,7 +19,9 @@ export default function DatePicker ({name, label, value, error, onChange }) {
             onChange={onChange}
             InputProps={{
                 startAdornment: (
-                    <InputAdornment position='start'/>
+                    <InputAdornment position='start' >
+                        <DateRange />
+                    </InputAdornment>
                 ),
             }}
             {...(error && {error:true,helperText:error})}
