@@ -7,7 +7,8 @@ async function prepareDatabase (path) {
         }
         //  console.log('Connected to the file SQlite database.');
     });
-
+    await database.run('CREATE TABLE IF NOT EXISTS events (firstName TEXT, secondName TEXT, email TEXT, date DATE)');
+    
     return database;
 }
 
