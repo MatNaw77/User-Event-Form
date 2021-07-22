@@ -4,6 +4,6 @@ export const validateEmail = (email) => {
 }
 
 export const validateDate = (date) => {
-    const regex = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;
+    const regex = /^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/;
     return regex.test(date);
 }
