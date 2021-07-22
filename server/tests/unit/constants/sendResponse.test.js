@@ -2,42 +2,34 @@ import sendResponse from '../../../constants/sendResponse.js';
 import { constants } from '../../../constants/constants.js';
 import { mockResponse } from '../../reqResMocks.js';
 
-let res = {};
+describe('Function setResponse', () => {
+    let res = {};
 
-describe("setResponse tests", () => {
-
-    beforeAll( async () => {
+    beforeAll(() => {
         res = mockResponse();
     });
 
-    test('postEvent without payload', async () => {
-        await sendResponse(res);
-        expect(res.status).toHaveBeenCalledWith(500);
-        expect(res.json).toHaveBeenCalled();
-    });
-
-    test('postEvent with not existing status', async () => {
-        await sendResponse(res, 'random');
-        expect(res.status).toHaveBeenCalledWith(500);
-        expect(res.json).toHaveBeenCalled();
-    });
-
-    test('postEvent with succcess', async () => {
+    it('Should return status 200 when calling with sucess status', async () => {
         await sendResponse(res, constants.SUCCESS);
         expect(res.status).toHaveBeenCalledWith(200);
         expect(res.json).toHaveBeenCalled();
     });
 
-    test('postEvent with error', async () => {
+    it('Should return error 500 when no payload', async () => {
+        await sendResponse(res);
+        expect(res.status).toHaveBeenCalledWith(500);
+        expect(res.json).toHaveBeenCalled();
+    });
+
+    it('Should return error 500 when calling with not existing status', async () => {
+        await sendResponse(res, 'missed');
+        expect(res.status).toHaveBeenCalledWith(500);
+        expect(res.json).toHaveBeenCalled();
+    });
+
+    it('Should return error 500 when calling with error status', async () => {
         await sendResponse(res, constants.ERROR);
         expect(res.status).toHaveBeenCalledWith(500);
         expect(res.json).toHaveBeenCalled();
     });
-
-    test('postEvent with error', async () => {
-        await sendResponse(res, constants.PARAM_ERROR);
-        expect(res.status).toHaveBeenCalledWith(500);
-        expect(res.json).toHaveBeenCalled();
-    });
-
 });

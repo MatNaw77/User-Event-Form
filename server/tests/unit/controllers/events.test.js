@@ -1,31 +1,41 @@
 
 import { addEvent } from '../../../controllers/events.js'
 import { constants } from '../../../constants/constants.js';
-jest.mock('../../../services/events.js');
-import addNewEvent from '../../../services/events.js';
-jest.mock('express-validator');
-import { validationResult } from 'express-validator';
 import { mockRequest, mockResponse } from '../../reqResMocks.js';
 
-let res = {};
+jest.mock('../../../services/events.js');
+import addNewEvent from '../../../services/events.js';
 
-describe("addEvent tests", () => {
-
-    beforeAll( async () => {
-        res = mockResponse();  
-        validationResult.mockReturnValue({});
+describe("Function addEvent", () => {
+    let res = {};
+    let event = {
+        firstName: 'mat',
+        secondName: 'naw',
+        email: 'mat@gm.pl',
+        date: '12-12-2021'
+    }
+    
+    beforeEach(() => {
+        res = mockResponse();
     });
 
-    test('postEvent with empty data', async () => {
-        const req = mockRequest({firstName: '', secondName: '', email: '', date: ''});
+    it('Should return status 500 with postEvent without data in argument', async () => {
+        let emptyEvent = {
+            firstName: '',
+            secondName: '',
+            email: '',
+            date: ''
+        };
+        
+        const req = mockRequest(emptyEvent);
         
         await addEvent(req, res);
         expect(res.status).toHaveBeenCalledWith(500);
     });
 
-    test('postEvent with mocked function addNewEvent returning SUCCESS', async () => {
-        const req = mockRequest({firstName: 'mat', secondName: 'naw', email: 'mat@gm.pl', date: '12-12-2021'});
-        
+    it('Should return status 200 with mocked function addNewEvent returning SUCCESS', async () => {
+        const req = mockRequest(event);
+
         addNewEvent.mockReturnValueOnce(constants.SUCCESS)
         await addEvent(req, res);
 
@@ -33,8 +43,8 @@ describe("addEvent tests", () => {
         expect(res.status).toHaveBeenCalledWith(200);
     });
 
-    test('postEvent with mocked function addNewEvent returning ERROR', async () => {
-        const req = mockRequest({firstName: 'mat', secondName: 'naw', email: 'mat@gm.pl', date: '12-12-2021'});
+    it('Should return status 500 with mocked function addNewEvent returning ERROR', async () => {
+        const req = mockRequest(event);
 
         addNewEvent.mockReturnValueOnce(constants.ERROR);
         await addEvent(req, res);
@@ -43,14 +53,25 @@ describe("addEvent tests", () => {
         expect(res.status).toHaveBeenCalledWith(500);
     });
 
-    test('postEvent with mocked function addNewEvent returning ERROR', async () => {
-        const req = mockRequest({firstName: 'mat', secondName: 'naw', email: 'mat@gm.pl', date: '12-12-2021'});
+    it('Should respond with 500 due to wrong date', async () => {
+        let eventData = { ...event};
+        eventData.date = '20123-12-12';
+        const req = mockRequest(event);
 
-        validationResult.mockReturnValueOnce({mock: '1'});
-        addNewEvent.mockReturnValueOnce(constants.ERROR);
         await addEvent(req, res);
 
         expect(addNewEvent).toHaveBeenCalled();
-        expect(res.status).toHaveBeenCalledWith(500);
+        expect(res.status).toHaveBeenCalledWith(500);   
+    });
+
+    it('Should respond with 500 due to wrong email', async () => {
+        let eventData = { ...event};
+        eventData.email = 'matgmailcom';
+        const req = mockRequest(event);
+
+        await addEvent(req, res);
+
+        expect(addNewEvent).toHaveBeenCalled();
+        expect(res.status).toHaveBeenCalledWith(500);   
     });
 });
