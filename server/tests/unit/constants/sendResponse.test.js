@@ -4,13 +4,12 @@ import { mockResponse } from '../../reqResMocks.js';
 
 let res = {};
 
-describe("setResponse tests", () => {
-
+describe('Function setResponse', () => {
     beforeAll( async () => {
         res = mockResponse();
     });
 
-    test('postEvent without payload', async () => {
+    test('Should return error 500 when no payload', async () => {
         await sendResponse(res);
         expect(res.status).toHaveBeenCalledWith(500);
         expect(res.json).toHaveBeenCalled();

@@ -1,14 +1,14 @@
 import addNewEvent from '../../../services/events.js';
-jest.mock('../../../database/events/events.js');
-import { postEvent } from '../../../database/events/events.js';
 import { mockRequest, mockResponse } from '../../reqResMocks.js';
 import { constants } from '../../../constants/constants.js';
 
-let res = {};
+jest.mock('../../../database/events/events.js');
+import { postEvent } from '../../../database/events/events.js';
 
 describe("addNewEvent tests", () => {
+    let res = {};
 
-    beforeAll( async () => {
+    beforeEach( async () => {
         res = mockResponse();  
     });
 
@@ -29,5 +29,4 @@ describe("addNewEvent tests", () => {
         const result = await addNewEvent(req, res);
         expect(result).toBe(constants.SUCCESS);
     });
-
 })

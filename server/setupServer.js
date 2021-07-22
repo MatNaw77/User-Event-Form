@@ -1,39 +1,29 @@
 import express from 'express';
 import http from 'http';
-import expressSession from 'express-session';
 import cors from 'cors';
 import prepareRoutes from './routes.js';
 import prepareDatabase from './prepareDatabase.js';
-
-let database = {};
-const app = express();
 
 function logRequest(req, res, next) {
     console.info(`${req.method} ${req.originalUrl}`);
     next();
 }
 
-async function applyMiddleware (app, session) {
+async function applyMiddleware (app) {
     app.use(logRequest);
     app.use(express.urlencoded({extended: true}));
     app.use(express.json({ limit: '1mb', extended: true }));
-    app.use(session);
     app.use(cors());
 }
 
 async function prepareServer() {
+    const app = express();
     const httpServer = http.createServer(app);
     const appRouter = express.Router();
 
-    const session = expressSession({
-        secret: 'my-secret',
-        resave: true,
-        saveUninitialized: true
-    });
+    const database = await prepareDatabase('./database/database.db');
 
-    database = await prepareDatabase('./database/database.db');
-
-    // applyMiddleware(app, session);
+    applyMiddleware(app);
 
     prepareRoutes(appRouter, database)
     app.use('/api', appRouter);
@@ -50,4 +40,4 @@ async function startServer(){
     });
 }
 
-export { prepareServer, startServer, app }
+export { prepareServer, startServer }
