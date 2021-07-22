@@ -50,7 +50,6 @@ export default function EventForm() {
       ...values,
       [name]: value
     });
-    console.log(values);
   }
 
   const handleSubmit = async (event) => {
