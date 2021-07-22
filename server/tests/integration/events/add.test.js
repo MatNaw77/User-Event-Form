@@ -25,7 +25,7 @@ describe('POST/api/event', () => {
 
     it('Should respond with 500 status and wrong email message', async () => {
         let eventData = { ...event};
-        eventData.email = "matgmail.com"
+        eventData.email = 'matgmail.com';
         const response = await request(server).post('/api/event').send(eventData);
         const expectedResult = { 'msg': constants.EMAIL_ERROR };
         
