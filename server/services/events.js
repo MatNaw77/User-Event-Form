@@ -11,8 +11,7 @@ export default async function addNewEvent ({ database, firstName, secondName, em
         ];
         
         return await postEvent(database, eventData);
-    } catch (e) {
-        console.log(e);
+    } catch (error) {
         return constants.ERROR;
     }
 }

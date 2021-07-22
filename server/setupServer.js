@@ -5,6 +5,9 @@ import cors from 'cors';
 import prepareRoutes from './routes.js';
 import prepareDatabase from './prepareDatabase.js';
 
+let database = {};
+const app = express();
+
 function logRequest(req, res, next) {
     console.info(`${req.method} ${req.originalUrl}`);
     next();
@@ -19,7 +22,6 @@ async function applyMiddleware (app, session) {
 }
 
 async function prepareServer() {
-    const app = express();
     const httpServer = http.createServer(app);
     const appRouter = express.Router();
 
@@ -29,13 +31,13 @@ async function prepareServer() {
         saveUninitialized: true
     });
 
-    const database = await prepareDatabase('./database/database.db');
+    database = await prepareDatabase('./database/database.db');
 
-    applyMiddleware(app, session);
+    // applyMiddleware(app, session);
 
     prepareRoutes(appRouter, database)
     app.use('/api', appRouter);
-
+      
     return httpServer;
 }   
 
@@ -48,4 +50,4 @@ async function startServer(){
     });
 }
 
-export { prepareServer, startServer }
+export { prepareServer, startServer, app }

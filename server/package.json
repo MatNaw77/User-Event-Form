@@ -7,7 +7,7 @@
   "license": "ISC",
   "type": "module",
   "scripts": {
-    "test": "jest"
+    "test": "jest --detectOpenHandles"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -17,10 +17,12 @@
     "http": "0.0.1-security",
     "jest-mock": "^27.0.6",
     "nodemon": "^2.0.12",
+    "request": "^2.88.2",
     "sqlite3": "^5.0.2"
   },
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.14.5",
-    "jest": "^27.0.6"
+    "jest": "^27.0.6",
+    "supertest": "^6.1.4"
   }
 }

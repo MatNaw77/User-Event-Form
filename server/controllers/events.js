@@ -7,7 +7,7 @@ const addEvent = async (req, res, database) => {
     const { firstName, secondName, email, date } = req.body;
     const errors = validationResult(req);
 
-    if (!errors.isEmpty()) {
+    if (!errors.length === 0) {
         await sendResponse(res, constants.PARAM_ERROR);
         return;
     }

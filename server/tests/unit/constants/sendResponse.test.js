@@ -1,12 +1,6 @@
 import sendResponse from '../../../constants/sendResponse.js';
 import { constants } from '../../../constants/constants.js';
-
-const mockResponse = () => {
-    const res = {};
-    res.status = jest.fn().mockReturnValue(res);
-    res.json = jest.fn().mockReturnValue(res);
-    return res;
-  };
+import { mockResponse } from '../../reqResMocks.js';
 
 let res = {};
 
