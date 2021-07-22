@@ -53,11 +53,11 @@ export default function EventForm() {
     console.log(values);
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (validate()){
       setLoading(true);
-      sendFrom(values, setLoading, setResult)
+      await sendFrom(values, setLoading, setResult)
     }
   };
 

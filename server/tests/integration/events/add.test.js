@@ -8,7 +8,7 @@ describe('POST/api/event', () => {
         firstName: 'mat',
         secondName: 'naw',
         email: 'mat@gm.pl',
-        date: '12-12-2021'
+        date: '2021-12-12'
     };
 
     beforeAll( async () => {
