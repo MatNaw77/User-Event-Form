@@ -57,8 +57,7 @@ export default function EventForm() {
     event.preventDefault();
     if (validate()){
       setLoading(true);
-      sendFrom(values, setLoading);
-      setResult(3);
+      sendFrom(values, setLoading, setResult)
     }
   };
 

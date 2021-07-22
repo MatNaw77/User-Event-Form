@@ -1,7 +1,7 @@
-import constants from '../constants/constants.js';
+import { constants } from '../constants/constants.js';
 import { postEvent } from '../database/events/events.js';
 
-const addNewEvent = async ({ database, firstName, secondName, email, date}) => {
+export default async function addNewEvent ({ database, firstName, secondName, email, date})  {
     try {
         let eventData = [
             firstName, 
@@ -11,10 +11,7 @@ const addNewEvent = async ({ database, firstName, secondName, email, date}) => {
         ];
         
         return await postEvent(database, eventData);
-    } catch (e) {
-        console.log(e);
+    } catch (error) {
         return constants.ERROR;
     }
 }
-
-export { addNewEvent };
