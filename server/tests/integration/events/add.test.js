@@ -15,6 +15,10 @@ describe('POST/api/event', () => {
         server = await startServer(4000);
     });
 
+    afterAll(() => {
+        server.close();
+    });
+
     it('Should respond with 200 status', async () => {
         const response = await request(server).post('/api/event').send(event);
         const expectedResult = { 'msg': constants.SUCCESS };
