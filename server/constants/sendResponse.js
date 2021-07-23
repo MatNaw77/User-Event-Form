@@ -1,13 +1,19 @@
-import constants from './constants.js';
+import { constants } from './constants.js';
 
 const responseStatuses = {
     [constants.SUCCESS]: 200,
     [constants.ERROR]: 500,
-    [constants.MISSING_PARAMS]: 500
+    [constants.PARAM_ERROR]: 500,
+    [constants.EMAIL_ERROR]: 500,
+    [constants.DATE_ERROR]: 500
 };
 
-const sendResponse = (res, payload) => {
-    res.status(responseStatuses[payload] || 200).json({msg: payload});
+const sendResponse = async (res, payload) => {
+    try {
+        await res.status(responseStatuses[payload] || 500).json({msg: payload || constants.ERROR});
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 export default sendResponse;

@@ -1,3 +1,5 @@
 # dependencies
 /frontend/node_modules
 /server/node_modules
+/.vscode
+/frontend/src/tests/components/__snapshots__

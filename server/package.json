@@ -5,12 +5,25 @@
   "main": "index.js",
   "author": "",
   "license": "ISC",
-  "type": "module" ,
+  "type": "module",
+  "scripts": {
+    "test": "jest --detectOpenHandles",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-session": "^1.17.2",
     "http": "0.0.1-security",
-    "nodemon": "^2.0.12"
+    "jest-mock": "^27.0.6",
+    "request": "^2.88.2",
+    "sqlite3": "^5.0.2"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.14.5",
+    "jest": "^27.0.6",
+    "nodemon": "^2.0.12",
+    "supertest": "^6.1.4"
   }
 }

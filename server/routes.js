@@ -1,8 +1,7 @@
-import constants from './constants/constants.js'
 import { addEvent } from './controllers/events.js';
 
-async function prepareRoutes(app) {
-    app.post('/events/add', async (req, res) => addEvent(req, res, constants.SUCCESS));
+async function prepareRoutes(app, database) {
+    app.post('/event', async (req, res) => addEvent(req, res, database));
 }
 
 export default prepareRoutes;
