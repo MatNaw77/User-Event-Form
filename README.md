@@ -7,17 +7,13 @@ Application was written in javascript language using tools:
 
 In the project directory, you first need to install all the modules, to do this, you must run the following command inside the frontend and server directories:
 
-### `npm install || npm i`
+### `npm install`
 
-To run frontend you need to run the command inside 'frontend' folder:
+To run frontend you need to run the command inside 'frontend' folder, to run server you need to run this command inside 'server' folder:
 
 ### `npm start`
 
-To run the server you need to run the command inside 'server' folder:
-
-### `node index.js`
-
-To run frontend you need to run the command inside 'frontend' folder, to run test for server jus use it inside 'server' folder:
+To run frontend you need to run the command inside 'frontend' folder, to run test for server  you need to run this command inside inside 'server' folder:
 
 ### `npm run test`
 
