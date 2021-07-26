@@ -1,6 +1,7 @@
 import { TextField,   InputAdornment, } from '@material-ui/core';
 import { useStyles } from '../styles';
 import EmailIcon from '@material-ui/icons/Email';
+import PropTypes from 'prop-types';
 
 export default function EmailInput ({name, label, value, error, onChange }) { 
     const classes = useStyles();
@@ -27,3 +28,11 @@ export default function EmailInput ({name, label, value, error, onChange }) {
         />
     );
 }
+
+EmailInput.propTypes = {
+    name: PropTypes.string,
+    label: PropTypes.string,
+    value : PropTypes.string,
+    error: PropTypes.string,
+    onChange: PropTypes.func
+};

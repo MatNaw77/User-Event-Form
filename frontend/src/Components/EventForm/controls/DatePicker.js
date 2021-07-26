@@ -1,6 +1,7 @@
 import { TextField,   InputAdornment, } from '@material-ui/core';
 import { useStyles } from '../styles';
 import DateRange from '@material-ui/icons/DateRange';
+import PropTypes from 'prop-types';
 
 export default function DatePicker ({name, label, value, error, onChange }) { 
     const classes = useStyles();
@@ -28,3 +29,11 @@ export default function DatePicker ({name, label, value, error, onChange }) {
         />
     );
 }
+
+DatePicker.propTypes = {
+    name: PropTypes.string,
+    label: PropTypes.string,
+    value : PropTypes.string,
+    error: PropTypes.string,
+    onChange: PropTypes.func
+};

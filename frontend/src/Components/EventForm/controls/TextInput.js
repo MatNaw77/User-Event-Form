@@ -1,5 +1,6 @@
 import { TextField } from '@material-ui/core';
 import { useStyles } from '../styles';
+import PropTypes from 'prop-types';
 
 export default function TextInput ({name, label, error=null, value, onChange }) { 
     const classes = useStyles();
@@ -20,3 +21,11 @@ export default function TextInput ({name, label, error=null, value, onChange }) 
 
     );
 }
+
+TextInput.propTypes = {
+    name: PropTypes.string,
+    label: PropTypes.string,
+    value : PropTypes.string,
+    error: PropTypes.string,
+    onChange: PropTypes.func
+};
