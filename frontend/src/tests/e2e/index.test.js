@@ -28,7 +28,6 @@ describe('E2E tests', () => {
         expect(alert).toContain('An event has been added to database!');
     });
 
-
     it('Should show error alert when send wrong data', async () => {
         await page.type('input[name="firstName"]', 'Mateusz');
         await page.type('input[name="secondName"]', 'Naw');
